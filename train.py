@@ -13,9 +13,8 @@ import torch
 import torchvision
 from torch.utils.data import DataLoader
 
-
 # * ML model
-
+from sklearn import preprocessing, model_selection
 
 # Function to convert Dataset into YoloV5 compatible format 
 
@@ -33,7 +32,7 @@ def convert_dataset(folder,table):
 	df["y_center_norm"]=(table["1"]+df["height_norm"])/img_height
 	print(df)
 	df.to_csv(os.path.join(folder,'BB_labels_yolo.txt'))
-	return()
+	return(df)
 
 # Function to load dataset
 
@@ -88,7 +87,11 @@ def main():
     # Display dataset
     display_dataset_images(folder,table)
     # Convert dataset to Yolo Compatible
-    convert_dataset(folder,table)
+    df=convert_dataset(folder,table)
+    # Training-validation split
+    df_train, df_valid = model_selection.train_test_split(df, test_size=0.1, random_state=13, shuffle=True)
+    print(df_train)
+    print(df_valid)
 
 
 

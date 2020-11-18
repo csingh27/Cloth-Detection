@@ -12,14 +12,14 @@ Dataset of
 * Bounding box labels for each image in CSV  
 
 *Steps :*  
-1. Load dataset images (JPEG) and BB_labels (TXT) files  
-2. Analyse and display dataset  
-3. Model selection  
-4. Convert dataset to a model compatible format  
+1. Load dataset images (JPEG) and BB_labels (TXT) files✓  
+2. Analyse and display dataset✓  
+3. Model selection (Yolo v5)✓  
+4. Convert dataset to a model compatible format✓  
+5. Training-validation split  
 4. Data Augmentation  
 5. Display Augmented data  
 6. Train-test split  
-7. Choose a simple model  
 8. Train the model  
 9. Test the result  
 10. Inference  
