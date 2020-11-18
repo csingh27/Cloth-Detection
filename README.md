@@ -1,6 +1,37 @@
 # Coding-Challenge-Sewts  
 
-Challenge Evaluation criteria :   
+*Run :*   
+python3 train.py
+
+*Goal :*   
+Object (towel) localization (Bounding Box Detection)  
+
+*Given :*  
+Dataset of 
+* 100 images with towel  
+* Bounding box labels for each image in CSV  
+
+*Steps :*  
+1. Load dataset images (JPEG) and BB_labels (TXT) files  
+2. Analyse and display dataset  
+3. Model selection  
+4. Convert dataset to a model compatible format  
+4. Data Augmentation  
+5. Display Augmented data  
+6. Train-test split  
+7. Choose a simple model  
+8. Train the model  
+9. Test the result  
+10. Inference  
+ 
+*Installation requirements :*  
+Torch -  
+python3 -m pip install torch==1.4.0+cu92 torchvision==0.5.0+cu92 -f https://download.pytorch.org/whl/torch_stable.html  
+Opencv -  
+pip3 install opencv-python  
+
+
+*Challenge Evaluation criteria :*   
 
 • Sophisticated naming conventions  
 • Code styling (i.e. PEP8)  
@@ -8,33 +39,4 @@ Challenge Evaluation criteria :
 • Code reusability  
 • Testing procedures  
 • Consistent use of a version control system (i.e. git)  
-
-*Given :*  
-
-Dataset of images with towel  
-
-*Goal :*   
-
-Object (towel) localization (Bounding Box Detection)  
-
-*Tasks :*  
-* Dataset generation  
-* Training the model  
-
-*Dataset :*   
-Image + 2 points defining the bounding box
-Labels are in a CSV file
-
-*Model :*  
-
-*Steps :*  
-1. Load dataset images (JPEG) and BB_labels (TXT) files  
-2. Analyse dataset  
-3. Display dataset  
-4. Data Augmentation  
-5. Display Augmented data  
-6. Choose a simple model  
-
- 
-
 
