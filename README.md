@@ -16,7 +16,8 @@ Dataset of
 2. Analyse and display dataset✓  
 3. Model selection (Yolo v5)✓  
 4. Convert dataset to a model compatible format✓  
-5. Training-validation split  
+5. Train-test split✓  
+6. Data pre-processing✓  
 4. Data Augmentation  
 5. Display Augmented data  
 6. Train-test split  
