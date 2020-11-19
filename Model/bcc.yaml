@@ -1,0 +1,6 @@
+train : /home/chandandeep/GitHub/Coding-Challenge-Sewts/Dataset/Dataset_yolo/images/train/
+val : /home/chandandeep/GitHub/Coding-Challenge-Sewts/Dataset/Dataset_yolo/images/val/
+
+nc: 1
+
+names: ['towel'] 
