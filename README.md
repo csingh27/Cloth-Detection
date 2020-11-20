@@ -44,7 +44,8 @@ python3 train.py --img 224 --batch 4 --epochs 2     --data /home/chandandeep/Git
 tensorboard --logdir=runs
 
 *Model Inference :*   
-python yolov5/detect.py --source ~/Coding-Challenge-Sewts/Dataset/Dataset_yolo/images/val  --weights '~/yolov5/runs/train/BCCM18/weights/best.pt'
+* python yolov5/detect.py --source ../Coding-Challenge-Sewts/Dataset/Dataset_yolo/images/val  --weights '../yolov5/runs/train/BCCM18/weights/best.pt'
+* Output of the inference will be saved inside : ../yolov5/runs/train/BCCM
 
 
 *Challenge Evaluation criteria :*   
