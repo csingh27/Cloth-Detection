@@ -1,7 +1,14 @@
 # Coding-Challenge-Sewts  
 
 *Run :*   
-python3 train.py
+1. Dataset generation 
+* python3 dataset_generate.py
+2. Model Training
+* python3 train.py --img 224 --batch 4 --epochs 2     --data /home/chandandeep/GitHub/Coding-Challenge-Sewts/Model/bcc.yaml --cfg /home/chandandeep/GitHub/Coding-Challenge-Sewts/Model/yolov5s.yaml --name BCCM
+* tensorboard --logdir=runs
+3. Model Inference
+* python yolov5/detect.py --source ../Coding-Challenge-Sewts/Dataset/Dataset_yolo/images/val  --weights '../yolov5/runs/train/BCCM18/weights/best.pt'
+* Output of the inference will be saved inside : ../yolov5/runs/train/BCCM
 
 *Goal :*   
 Object (towel) localization (Bounding Box Detection)  
@@ -37,16 +44,6 @@ pip3 install tensorboard
 Matplotlib -  
 pip3 install matplotlib
 
-*Model Training :*   
-* Train model
-python3 train.py --img 224 --batch 4 --epochs 2     --data /home/chandandeep/GitHub/Coding-Challenge-Sewts/Model/bcc.yaml --cfg /home/chandandeep/GitHub/Coding-Challenge-Sewts/Model/yolov5s.yaml --name BCCM
-* Visualize using Tensorboard
-tensorboard --logdir=runs
-
-*Model Inference :*   
-* python yolov5/detect.py --source ../Coding-Challenge-Sewts/Dataset/Dataset_yolo/images/val  --weights '../yolov5/runs/train/BCCM18/weights/best.pt'
-* Output of the inference will be saved inside : ../yolov5/runs/train/BCCM
-
 
 *Challenge Evaluation criteria :*   
 
@@ -56,7 +53,3 @@ tensorboard --logdir=runs
 • Code reusability  
 • Testing procedures  
 • Consistent use of a version control system (i.e. git)  
-
-
-
-

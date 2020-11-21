@@ -1,5 +1,7 @@
+"""
+    CODING CHALLENGE SEWTS
+    """
 # IMPORTING LIBRARIES
-
 
 # * General libraries
 import cv2
@@ -20,21 +22,32 @@ from sklearn import preprocessing, model_selection
 
 
 def dataset_split(df, folder, train_img_path, train_label_path):
+    """
+    Split dataset into training and test set
+    and store in a new directory structure
+        Args:
+            df: Data Frame of the split dataset
+        folder : Path of the original dataset
+        train_img_path : Path of the training images
+        train_label_path : Path of the training labels
+    """
     filenames = []
     for name in df.file_name:
         filenames.append(name)
-    # Directory Structure :
-    # --Dataset_yolo
-    # 	 --Images
-    # 	 	--Train
-    # 	 	--Val
-    # --Dataset_yolo
-    # 	 --Labels
-    # 	 	--Train
-    # 	 	--Val
-    # Image format .jpg, Label format .txt
-    # (Separate .txt file label for each image)
-    # Inside label.txt : x_center_norm, y_center_norm, width_norm, height_norm
+    """
+    Directory Structure :
+    --Dataset_yolo
+        --Images
+            --Train
+            --Val
+    --Dataset_yolo
+        --Labels
+            --Train
+            --Val
+    Image format .jpg, Label format .txt
+    (Separate .txt file label for each image)
+    Inside label.txt : x_center_norm, y_center_norm, width_norm, height_norm
+    """
     for filename in filenames:
         yolo_list = []
         for i, row in df[df.file_name == filename].iterrows():
@@ -54,14 +67,20 @@ def dataset_split(df, folder, train_img_path, train_label_path):
 
 
 def convert_dataset(path, table):
-    # YoloV5 compatible dataset has x_center_norm, y_center_norm,
-    # width_norm, height_norm as its columns
+    """
+    Convert dataset into Yolo V5 compatible format
+        Args:
+            path: Global path
+        table : Data Frame of the original dataset
+    """
     img_width = 224
     img_height = 224
     width = []
     height = []
     x_center = []
     y_center = []
+    # YoloV5 compatible dataset has x_center_norm, y_center_norm,
+    # width_norm, height_norm as its columns
     df = pd.DataFrame(columns=['file_name', 'x_center_norm',
                                'y_center_norm', 'width_norm', 'height_norm'])
     df["file_name"] = table['Unnamed: 0'].astype(str)
@@ -77,6 +96,12 @@ def convert_dataset(path, table):
 
 
 def display_dataset_images(folder, table):
+    """
+    Display dataset images initially
+        Args:
+            folder: Path of the original dataset
+        table : Data Frame of the original dataset
+    """
     print(table)
     images = []
     image_path = []
@@ -125,7 +150,7 @@ def display_dataset_images(folder, table):
         if img is not None:
             images.append(img)
         i = i + 1
-    cv2.waitKey(500)
+    cv2.waitKey(5000)
     return(images, start_point, end_point)
 
 # Define main function
