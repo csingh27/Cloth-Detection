@@ -2,7 +2,7 @@
 
 *Run :*   
 1. Dataset generation 
-* python3 dataset_generate.py
+* python3 dataset_generate.py OR python3 dataset_generate.py -p *Location of dataset_raw*
 2. Model Training
 * python3 train.py --img 224 --batch 4 --epochs 2     --data /home/chandandeep/GitHub/Coding-Challenge-Sewts/Model/bcc.yaml --cfg /home/chandandeep/GitHub/Coding-Challenge-Sewts/Model/yolov5s.yaml --name BCCM
 * tensorboard --logdir=runs
