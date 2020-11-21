@@ -1,5 +1,6 @@
 """
-    CODING CHALLENGE SEWTS
+    DATASET GENERATION
+
     """
 
 # IMPORTING LIBRARIES
@@ -19,6 +20,43 @@ import torch
 import torchvision
 from torch.utils.data import DataLoader
 from sklearn import preprocessing, model_selection
+
+# Testing function for convert_dataset function
+
+
+def test_convert_dataset(path):
+
+        # setup
+
+        df = pd.DataFrame({
+            "Unnamed: 0": ["11.jpg", "11.jpg", "11.jpg", "11.jpg", 1],
+            "0": [0, 0, 224, 224, "a"],
+            "1": [0, 0, 224, 224, 2],
+            "2": [224, 0, 0, 224, "random"],
+            "3": [224, 0, 0, 224, -1.00],
+            })
+
+        df_exp = pd.DataFrame({
+            "file_name": ["11.jpg", "11.jpg", "11.jpg", "11.jpg"],
+            "x_center_norm": [0.5, 0, 0.5, 1.0],
+            "y_center_norm": [0.5, 0, 0.5, 1.0],
+            "width_norm": [1.0, 0, -1, 0],
+            "height_norm": [1.0, 0, -1, 0],
+            })
+
+        # call function
+
+        actual = convert_dataset(path, df)
+
+        # set expectations
+
+        expected = df_exp
+
+        # assertion
+
+        pd.testing.assert_frame_equal(actual, expected)
+
+        return 0
 
 # Function to split training and test set
 
@@ -97,6 +135,10 @@ def convert_dataset(path, table):
     df = pd.DataFrame(columns=['file_name', 'x_center_norm',
                                'y_center_norm', 'width_norm', 'height_norm'])
 
+    table=table[table["0"].apply(lambda x: isinstance(x, (int, np.int64)))]
+
+    print(table)
+
     df["file_name"] = table['Unnamed: 0'].astype(str)
 
     df["width_norm"] = (table["2"]-table["0"]) / img_width
@@ -107,6 +149,15 @@ def convert_dataset(path, table):
 
     df["y_center_norm"] = (table["1"]/img_height) + (df["height_norm"]/2)
 
+    df["width_norm"] = df["width_norm"].astype(float)
+
+    df["height_norm"] = df["height_norm"].astype(float)
+
+    df["x_center_norm"] = df["x_center_norm"].astype(float)
+
+    df["y_center_norm"] = df["y_center_norm"].astype(float)
+
+    print(df.dtypes)
     print(df)
 
     df.to_csv(os.path.join(path, 'Dataset/Dataset_yolo/BB_labels_yolo.txt'))
@@ -176,9 +227,12 @@ def display_dataset_images(folder, table):
 
         print("(xmax,ymax)", end_point[i])
 
+        font = cv2.FONT_HERSHEY_SIMPLEX
         img = cv2.imread(image_path[i])
         img = cv2.rectangle(img, start_point[i], end_point[i],
                             color=(255, 0, 0), thickness=2)
+        img = cv2.putText(img, table.name, (10, 20), font, 0.5,
+                          (255, 255, 255), 2, cv2.LINE_AA)
         cv2.waitKey(100)
 
         # Displays images
@@ -187,7 +241,7 @@ def display_dataset_images(folder, table):
             images.append(img)
         i = i + 1
 
-    cv2.waitKey(5000)
+    cv2.waitKey(1000)
 
     return(images, start_point, end_point)
 
@@ -214,11 +268,17 @@ def main():
     csv_path = os.path.join(args.path, "BB_labels.csv")
     print(path)
     table = pd.read_csv(csv_path)
+    table.name = 'Raw'
     print(table)
 
     # Display dataset
     print("Raw dataset ... \n")
     display_dataset_images(args.path, table)
+
+    # Basic unit testing for convert_dataset function
+
+    print("Test-case  \n")
+    test_convert_dataset(path)
 
     # Convert dataset to Yolo Compatible
     df = convert_dataset(path, table)
@@ -248,11 +308,14 @@ def main():
 
     # Display converted dataset for verification
 
-    print("Train dataset ... \n")
+    print("Training dataset ... \n")
+    df_train.name = 'Train'
     display_dataset_images(train_img_path, df_train)
 
     print("Validation dataset ... \n")
+    df_valid.name = 'Test'
     display_dataset_images(valid_img_path, df_valid)
+
 
 if __name__ == '__main__':
     main()

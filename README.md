@@ -47,9 +47,9 @@ pip3 install matplotlib
 
 *Challenge Evaluation criteria :*   
 
-• Sophisticated naming conventions  
-• Code styling (i.e. PEP8)  
-• Simple but expressive comments  
-• Code reusability  
-• Testing procedures  
-• Consistent use of a version control system (i.e. git)  
+• Sophisticated naming conventions✓  
+• Code styling (i.e. PEP8)✓  
+• Simple but expressive comments✓  
+• Code reusability✓  
+• Testing procedures✓  
+• Consistent use of a version control system (i.e. git)✓  
